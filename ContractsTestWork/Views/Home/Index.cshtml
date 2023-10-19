@@ -1,0 +1,14 @@
+﻿@model ImportViewModel
+
+<h1>Импорт данных из Excel</h1>
+
+<form asp-controller="Import" asp-action="UploadFile" method="post" enctype="multipart/form-data">
+
+    <div class="form-group">
+        <label for="file">Выберите Excel файл</label>
+        <input type="file" name="file" id="file" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Загрузить</button>
+
+</form>
