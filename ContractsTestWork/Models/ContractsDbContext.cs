@@ -16,5 +16,6 @@ public class ContractsDbContext : DbContext
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfiguration(new ContractsConfiguration());
+        modelBuilder.ApplyConfiguration(new ContractsStagesConfiguration());
     }
 }

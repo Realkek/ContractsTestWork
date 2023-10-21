@@ -2,7 +2,7 @@
 
 namespace ContractsTestWork.Controllers;
 
-public class ContractsController : Controller
+public class ContractsPagesController : Controller
 {
     // Метод Index
     public IActionResult Index()

@@ -9,7 +9,7 @@
     <ItemGroup>
       <Folder Include="DataLayer\Repositories\Interfaces\" />
       <Folder Include="Domain\Services\Interfaces\" />
-      <Folder Include="Infrastructure\Extensions\" />
+      <Folder Include="Migrations\" />
       <Folder Include="Models\DataTransferObjects\" />
     </ItemGroup>
 
@@ -27,6 +27,11 @@
     <ItemGroup>
       <_ContentIncludedByDefault Remove="Pages\ContractsPages\Import.cshtml" />
       <_ContentIncludedByDefault Remove="Pages\ContractsPages\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ContractsApi\Error.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ContractsApi\_Layout.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\ContractsApi\_ValidationScriptsPartial.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Index.cshtml" />
+      <_ContentIncludedByDefault Remove="Views\Home\Privacy.cshtml" />
     </ItemGroup>
 
 </Project>
