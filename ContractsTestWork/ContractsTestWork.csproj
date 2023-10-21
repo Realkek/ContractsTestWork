@@ -24,4 +24,9 @@
       <PackageReference Include="Swashbuckle.AspNetCore" Version="6.5.0" />
     </ItemGroup>
 
+    <ItemGroup>
+      <_ContentIncludedByDefault Remove="Pages\ContractsPages\Import.cshtml" />
+      <_ContentIncludedByDefault Remove="Pages\ContractsPages\Index.cshtml" />
+    </ItemGroup>
+
 </Project>

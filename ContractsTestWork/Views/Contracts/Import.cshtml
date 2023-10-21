@@ -1,0 +1,13 @@
+﻿@page
+@model ContractsTestWork.Models.Entities.Contract
+
+@{
+    ViewData["Title"] = "Import Data";
+}
+
+<h2>Импорт данных из Excel</h2>
+
+<form method="post" enctype="multipart/form-data" asp-action="UploadFile" asp-controller="ContractsImport">
+    <input type="file" name="file"/>
+    <button type="submit">Загрузить файл</button>
+</form>
