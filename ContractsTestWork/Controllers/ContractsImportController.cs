@@ -1,16 +1,23 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ContractsTestWork.Domain.Services.Interfaces;
+using Microsoft.AspNetCore.Mvc;
 
 namespace ContractsTestWork.Controllers;
 
 [Route("api/Import")]
 public class ContractsImportController : Controller
 {
+    private readonly IContractImportService _contractsImportService;
+
+    public ContractsImportController(IContractImportService contractsImportService)
+    {
+        _contractsImportService = contractsImportService;
+    }
+
     [HttpPost]
-    [Route("UploadFile")]
+    [Route(nameof(UploadFile))]
     public async Task<IActionResult> UploadFile(IFormFile file)
     {
-        // Здесь необходимо реализовать обработку загруженного файла Excel и добавление данных в базу данных.
-        // Можно использовать библиотеки для работы с Excel, такие как EPPlus или ClosedXML.
-        return Ok("File uploaded and data added to the database.");
+        await _contractsImportService.ImportContracts(file);
+        return new OkResult();
     }
 }

@@ -17,6 +17,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=ContractsPages}/{action=Index}");
+    pattern: "{controller=ContractsPages}/{action=Import}");
 
 app.Run();
