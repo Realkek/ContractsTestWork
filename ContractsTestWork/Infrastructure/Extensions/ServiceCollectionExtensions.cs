@@ -22,11 +22,13 @@ public static class ServiceCollectionExtensions
     public static void ConfigureDomainServices(this IServiceCollection services)
     {
         services.AddScoped<IContractsService, ContractService>();
+        services.AddScoped<IContractImportService, ContractsImportService>();
     }
 
     public static void ConfigureRepositories(this IServiceCollection services)
     {
         services.AddScoped<IContractsRepo, ContractsRepo>();
         services.AddScoped<IContractStagesRepo, ContractStagesRepo>();
+        services.AddScoped<IContractImportRepo, ContractsImportRepo>();
     }
 }

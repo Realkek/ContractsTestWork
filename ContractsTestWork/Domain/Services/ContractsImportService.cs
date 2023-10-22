@@ -17,6 +17,7 @@ public class ContractsImportService : IContractImportService
 
     public async Task<IActionResult> ImportContracts(IFormFile? file)
     {
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         if (file == null || file.Length == 0)
         {
             return new BadRequestResult();
