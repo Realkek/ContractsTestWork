@@ -1,12 +1,119 @@
-﻿@page
-@model List<ContractsTestWork.Models.Entities.Contract>
-
-@{
-    ViewData["Title"] = "Contract";
+﻿@{
+    Layout = null; // Указание, что не используется макет
+    ViewData["Title"] = "Contracts and Stages";
 }
 
-<h2>Список договоров и этапов</h2>
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Contracts and Stages</title>
+</head>
+<body>
+    <h1>Contracts</h1>
+    <table id="contracts-table">
+        <thead>
+            <tr>
+                <th>Contract Code</th>
+                <th>Contract Name</th>
+                <th>Customer</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Contracts will be displayed here -->
+        </tbody>
+    </table>
 
-<div id="contractList">
-    <!-- Здесь будет отображаться список договоров и этапов через JavaScript -->
-</div>
+    <h1>Stages</h1>
+    <table id="stages-table">
+        <thead>
+            <tr>
+                <th>Stage Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Stages will be displayed here when a contract is clicked -->
+        </tbody>
+    </table>
+
+    <button id="load-contracts">Load Contracts</button>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const contractsTable = document.getElementById("contracts-table");
+            const stagesTable = document.getElementById("stages-table");
+            const loadContractsButton = document.getElementById("load-contracts");
+
+   function displayContracts(contracts) {
+       console.log("Contracts data received:", contracts); // Вывод в консоль для отладки
+   
+       const tbody = contractsTable.querySelector("tbody");
+       tbody.innerHTML = "";
+   
+       try {
+           const parsedContracts = JSON.parse(contracts);
+   
+           if (Array.isArray(parsedContracts)) {
+               parsedContracts.forEach(contract => {
+                   const row = tbody.insertRow();
+                   row.insertCell(0).innerText = contract.Code;
+                   row.insertCell(1).innerText = contract.Name;
+                   row.insertCell(2).innerText = contract.Customer;
+   
+                   row.addEventListener("click", function () {
+                       fetch(`/api/Contracts/GetContractStages?contractId=${contract.Id}`)
+                           .then(response => response.json())
+                           .then(data => {
+                               console.log("Stages data received:", data); // Вывод в консоль для отладки
+                               displayStages(data);
+                           })
+                           .catch(error => console.error("Error loading stages:", error));
+                   });
+               });
+           } else {
+               console.error("Contracts data is not an array:", contracts);
+           }
+       } catch (error) {
+           console.error("Error parsing JSON:", error);
+       }
+   }
+
+         function displayStages(stages) {
+             console.log("Stages data received:", stages); // Вывод в консоль для отладки
+         
+             const tbody = stagesTable.querySelector("tbody");
+             tbody.innerHTML = "";
+         
+             try {
+                 const parsedStages = JSON.parse(stages);
+         
+                 if (Array.isArray(parsedStages)) {
+                     parsedStages.forEach(stage => {
+                         const row = tbody.insertRow();
+                         row.insertCell(0).innerText = stage.StageName;
+                         row.insertCell(1).innerText = stage.StartDate;
+                         row.insertCell(2).innerText = stage.EndDate;
+                     });
+                 } else {
+                     console.error("Stages data is not an array:", stages);
+                 }
+             } catch (error) {
+                 console.error("Error parsing JSON for stages:", error);
+             }
+         }
+
+            loadContractsButton.addEventListener("click", function () {
+                fetch("/api/Contracts/GetContracts")
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Contracts data received:", data); // Вывод в консоль для отладки
+                        displayContracts(data);
+                    })
+                    .catch(error => console.error("Error loading contracts:", error));
+            });
+        });
+    </script>
+</body>
+</html>
