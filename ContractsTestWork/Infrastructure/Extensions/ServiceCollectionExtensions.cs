@@ -1,4 +1,8 @@
-﻿using ContractsTestWork.Models;
+﻿using ContractsTestWork.DataLayer.Repositories;
+using ContractsTestWork.DataLayer.Repositories.Interfaces;
+using ContractsTestWork.Domain.Services;
+using ContractsTestWork.Domain.Services.Interfaces;
+using ContractsTestWork.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace ContractsTestWork.Infrastructure.Extensions;
@@ -13,5 +17,15 @@ public static class ServiceCollectionExtensions
             options.UseSqlServer(
                 configuration.GetConnectionString("DbConnectionString"));
         });
+    }
+
+    public static void ConfigureDomainServices(this IServiceCollection services)
+    {
+        services.AddScoped<IContractsService, ContractService>();
+    }
+
+    public static void ConfigureRepositories(this IServiceCollection services)
+    {
+        services.AddScoped<IContractsRepo, ContractsRepo>();
     }
 }
