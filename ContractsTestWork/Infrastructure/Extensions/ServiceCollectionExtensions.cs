@@ -27,5 +27,6 @@ public static class ServiceCollectionExtensions
     public static void ConfigureRepositories(this IServiceCollection services)
     {
         services.AddScoped<IContractsRepo, ContractsRepo>();
+        services.AddScoped<IContractStagesRepo, ContractStagesRepo>();
     }
 }

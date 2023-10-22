@@ -13,24 +13,22 @@ public class ContractsApiController : Controller
     {
         _contractsService = contractsService;
     }
-    
+
     [HttpGet]
-    [Route("GetContracts")]
+    [Route(nameof(GetContracts))]
     public async Task<IActionResult> GetContracts()
     {
-        // Здесь необходимо реализовать метод для получения списка договоров в формате JSON.
-        // Используйте Entity Framework для извлечения данных из базы данных.
         var contracts = await _contractsService.GetContracts();
         var jsonContracts = JsonConvert.SerializeObject(contracts);
         return Json(jsonContracts);
     }
 
     [HttpGet]
-    [Route("GetContractStages")]
-    public IActionResult GetContractStages(int contractId)
+    [Route(nameof(GetContractStages))]
+    public async Task<IActionResult> GetContractStages(int contractId)
     {
-        // Здесь необходимо реализовать метод для получения списка этапов договора в формате JSON по выбранному договору.
-        // Используйте Entity Framework для извлечения данных из базы данных.
-        return Json(""); /* Список договоров в формате JSON */
+        var stages = await _contractsService.GetContractStages(contractId);
+        var jsonStages = JsonConvert.SerializeObject(stages);
+        return Json(jsonStages);
     }
 }

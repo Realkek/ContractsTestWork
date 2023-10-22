@@ -2,6 +2,6 @@
 
 public interface IRepositoryRead <T> 
 {
-    Task<T> GetItem(Guid id);
+    Task<T> GetItem(int id);
     Task<IEnumerable<T>> GetItems();
 }

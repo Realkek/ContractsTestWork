@@ -7,7 +7,7 @@ public class ContractsImportController : Controller
 {
     [HttpPost]
     [Route("UploadFile")]
-    public IActionResult UploadFile(IFormFile file)
+    public async Task<IActionResult> UploadFile(IFormFile file)
     {
         // Здесь необходимо реализовать обработку загруженного файла Excel и добавление данных в базу данных.
         // Можно использовать библиотеки для работы с Excel, такие как EPPlus или ClosedXML.

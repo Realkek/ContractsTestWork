@@ -7,15 +7,23 @@ namespace ContractsTestWork.Domain.Services;
 public class ContractService : IContractsService
 {
     private readonly IContractsRepo _contractsRepo;
+    private readonly IContractStagesRepo _contractStagesRepo;
 
-    public ContractService(IContractsRepo contractsRepo)
+    public ContractService(IContractsRepo contractsRepo, IContractStagesRepo contractStagesRepo)
     {
         _contractsRepo = contractsRepo;
+        _contractStagesRepo = contractStagesRepo;
     }
 
-    public async Task<List<Contract>> GetContracts()
+    public async Task<IEnumerable<Contract>> GetContracts()
     {
         var contracts = await _contractsRepo.GetItems();
-        return contracts.ToList();
+        return contracts;
+    }
+
+    public async Task<IEnumerable<ContractStage>> GetContractStages(int contractId)
+    {
+        var contractStages = await _contractStagesRepo.GetContractStages(contractId);
+        return contractStages;
     }
 }

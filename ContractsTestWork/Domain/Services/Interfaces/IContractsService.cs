@@ -4,5 +4,6 @@ namespace ContractsTestWork.Domain.Services.Interfaces;
 
 public interface IContractsService
 {
-    Task<List<Contract>> GetContracts();
+    Task<IEnumerable<Contract>> GetContracts();
+    Task<IEnumerable<ContractStage>> GetContractStages(int contractId);
 }

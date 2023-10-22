@@ -14,7 +14,7 @@ public class ContractsRepo : IContractsRepo
         _context = contractsDbContext;
     }
     
-    public Task<Contract> GetItem(Guid id)
+    public Task<Contract> GetItem(int id)
     {
         throw new NotImplementedException();
     }
